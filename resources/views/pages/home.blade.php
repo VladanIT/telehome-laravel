@@ -124,7 +124,9 @@
             @endisset
         </table>
     </div>
-
+    {{--
+        comments
+    --}}
     {{--
     <div id="calculations">
         <label>Ukupan broj intervencija: <?= $num_interventions ?></label>
