@@ -47,7 +47,9 @@
             <input type="button" id="consumerDeleteQuit" name="consumerDeleteQuit" class="btn btn-outline-primary" value="Ne"/>
         </div>
     </div>
-
+    {{--
+        comments
+    --}}
     <div class="col-lg-8 consumer-history">
         <table class="col-lg-11 content-interventions">
             <tr>
