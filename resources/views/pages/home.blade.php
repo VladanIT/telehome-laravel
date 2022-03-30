@@ -125,7 +125,7 @@
         </table>
     </div>
     {{--
-        comments
+        comments in blade file
     --}}
     {{--
     <div id="calculations">
