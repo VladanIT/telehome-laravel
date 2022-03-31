@@ -10,6 +10,7 @@ class Intervention extends Model
 {
     public $description;
     public $date;
+    public $type_id;
     public $consumer_id;
 
     public function getIntervention($id){
@@ -28,12 +29,20 @@ class Intervention extends Model
     }
 
     public function store(){
-        $rez = DB::table('th_interventions')
+        $data = DB::table('th_interventions')
             ->insert([
             'description' => $this->description,
             'date' => $this->date,
+            'type_id' => $this->type_id,
             'consumer_id' => $this->consumer_id
         ]);
-        return $rez;
+        return $data;
+    }
+
+    public function getTypes(){
+        $data = DB::table('th_type')
+            ->get();
+
+        return $data;
     }
 }

@@ -9,16 +9,16 @@ use App\Models\Intervention;
 
 class ConsumerController extends Controller
 {
-    // public function __construct(){
-    //     $consumers = new Consumer();
-    //     $this->consumers['consumers'] = $consumers->getAll();
-    // }
+    public function __construct(){
+        $type = new Intervention();
+        $this->types['types'] = $type->getTypes();
+    }
 
     public function getAllConsumers(){
         $consumers = new Consumer();
         $this->consumers['consumers'] = $consumers->getAll();
 
-        return view('pages.home', $this->consumers);
+        return view('pages.home', $this->consumers, $this->types);
     }
 
     public function getConsumerInfo($id){
@@ -28,7 +28,6 @@ class ConsumerController extends Controller
         // GETTING ALL INTERVENTIONS FOR A CERTAIN CONSUMER
         $interventions = new Intervention();
         $this->interventionData['intervention'] = $interventions->getIntervention($id);
-
 
         return view('pages.info', $this->consumerData, $this->interventionData);
     }
@@ -67,6 +66,6 @@ class ConsumerController extends Controller
         $consumer = new Consumer();
         $this->consumers['consumers'] = $consumer->search($id);
 
-        return view('pages.home', $this->consumers);
+        return view('pages.home', $this->consumers, $this->types);
     }
 }

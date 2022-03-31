@@ -19,65 +19,9 @@
         </div>
     </div>
 
-    {{-- @yield('filter_form') --}}
-    <div class="filter_form hidden" id="filter_form" >
-        <form action="{{ route('search') }}" method="post" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="idConsumer" name="idConsumer" class="form-control" placeholder="Sifra korisnika"/>
-            </div>
-            <div class="form-group">
-                <input type="submit" id="btnSearch" name="btnSearch" class="btn btn-primary" value="Trazi"/>
-            </div>
-        </form>
-    </div>
-
-    {{-- @yield('insert_form') --}}
-    <div class="insert_form hidden" id="insert_form">
-        <form action="{{ route('insert') }}" method="post" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="consumerId" name="consumerId" class="form-control" placeholder="Sifra korisnika"/>
-            </div>
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Ime korisnika"/>
-            </div>
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Prezime korisnika"/>
-            </div>
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="address" name="address" class="form-control" placeholder="Adresa korisnika"/>
-            </div>
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="place" name="place" class="form-control" placeholder="Mesto"/>
-            </div>
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="packet" name="packet" class="form-control" placeholder="Paket"/>
-            </div>
-            <div class="form-group">
-                <input type="submit" id="btnInsert" name="btnInsert" class="btn btn-primary" value="Dodaj"/>
-            </div>
-        </form>
-    </div>
-
-    {{-- @yield('intervention_form') --}}
-    <div class="insert_intervention_form hidden" id="insert_intervention_form">
-        <form action="{{ route('intervention.store') }}" method="post" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="text" id="consumerIdIntervention" name="consumerIdIntervention" class="form-control" placeholder="Sifra korisnika"/>
-            </div>
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <textarea id="descriptionIntervention" name="descriptionIntervention" class="form-control" placeholder="Opis"></textarea>
-            </div>
-            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-                <input type="date" id="dateIntervention" name="dateIntervention" class="form-control" placeholder="Datum"/>
-            </div>
-            <div class="form-group">
-                <input type="submit" id="btnInterventionInsert" name="btnInterventionInsert" class="btn btn-primary" value="Dodaj"/>
-            </div>
-        </form>
-    </div>
+    @include('components.search_form')
+    @include('components.consumer_form')
+    @include('components.intervention_form')
 
 </div>
 <div id="content">
@@ -85,26 +29,11 @@
     <div class="content-label">
         <h1>Tabela korisnika</h1>
     </div>
-    <div class="sort">
-        <select class="form-control" name="sortConsumers" id="sortConsumers">
-            <option value="" disabled selected>Odaberi mesec</option>
-            <option value="1">Januar</option>
-            <option value="2">Februar</option>
-            <option value="3">Mart</option>
-            <option value="4">April</option>
-            <option value="5">Maj</option>
-            <option value="6">Jun</option>
-            <option value="7">Jul</option>
-            <option value="8">Avgust</option>
-            <option value="9">Septembar</option>
-            <option value="10">Oktobar</option>
-            <option value="11">Novembar</option>
-            <option value="12">Decembar</option>
-        </select>
-    </div>
+
+    @include('components.sort')
 
     <div id="content-of-consumers">
-        <table class="content-of-users" id="pagination_data">
+        <table class="content-of-users">
             <tr>
                 <th>Ime</th>
                 <th>Prezime</th>
@@ -115,14 +44,7 @@
             </tr>
             @if($consumers->count())
                 @foreach ($consumers as $consumer)
-                    <tr>
-                        <td>{{ $consumer->first_name }}</td>
-                        <td>{{ $consumer->last_name }}</td>
-                        <td>{{ $consumer->consumerId }}</td>
-                        <td>{{ $consumer->address }}</td>
-                        <td>{{ $consumer->place }}</td>
-                        <td><a href="{{ route('consumer', ['id' => $consumer->consumerId]) }}">Info</a></td>
-                    </tr>
+                    @include('components.consumer', ['consumer' => $consumer])
                 @endforeach
             @else
                 <tr>
