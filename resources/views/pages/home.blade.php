@@ -20,13 +20,16 @@
     </div>
 
     {{-- @yield('filter_form') --}}
-    <div class="filter_form hidden" id="filter_form">
-        <div class="form-group col-lg-3 col-xs-12 col-xl-3">
-            <input type="text" id="idConsumer" name="idConsumer" class="form-control" placeholder="Sifra korisnika"/>
-        </div>
-        <div class="form-group">
-            <input type="button" id="btnSearch" name="btnSearch" class="btn btn-primary" value="Trazi"/>
-        </div>
+    <div class="filter_form hidden" id="filter_form" >
+        <form action="{{ route('search') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form-group col-lg-3 col-xs-12 col-xl-3">
+                <input type="text" id="idConsumer" name="idConsumer" class="form-control" placeholder="Sifra korisnika"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btnSearch" name="btnSearch" class="btn btn-primary" value="Trazi"/>
+            </div>
+        </form>
     </div>
 
     {{-- @yield('insert_form') --}}
@@ -110,7 +113,7 @@
                 <th>Mesto</th>
                 <th>Info</th>
             </tr>
-            @isset($consumers)
+            @if($consumers->count())
                 @foreach ($consumers as $consumer)
                     <tr>
                         <td>{{ $consumer->first_name }}</td>
@@ -121,7 +124,11 @@
                         <td><a href="{{ route('consumer', ['id' => $consumer->consumerId]) }}">Info</a></td>
                     </tr>
                 @endforeach
-            @endisset
+            @else
+                <tr>
+                    <td colspan="6">Nema korisnika.</td>
+                </tr>
+            @endif
         </table>
     </div>
     {{--

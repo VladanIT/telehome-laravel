@@ -20,5 +20,6 @@ Route::get('/consumer/{id}', [ConsumerController::class, 'getConsumerInfo'])->na
 Route::get('/consumer/delete/{id}', [ConsumerController::class, 'delete'])->name('consumer.delete');
 Route::get('/greska', [ConsumerController::class, 'greska'])->name('greska');
 Route::post('/insert', [ConsumerController::class, 'store'])->name('insert');
+Route::post('/search', [ConsumerController::class, 'search'])->name('search');
 
 Route::post('/insert/intervention', [InterventionController::class, 'store'])->name('intervention.store');

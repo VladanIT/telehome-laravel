@@ -24,8 +24,16 @@ class Consumer extends Model
 
     public function getConsumerById($consumerId){
         $data = DB::table('th_consumers')
+            ->where('consumerId', $consumerId)
             ->get()
             ->first();
+        return $data;
+    }
+
+    public function search($consumerId){
+        $data = DB::table('th_consumers')
+            ->where('consumerId', $consumerId)
+            ->get();
         return $data;
     }
 
