@@ -55,15 +55,17 @@
             <tr>
                 <th>Datum</th>
                 <th>Opis</th>
+                <th>Tip intervencije</th>
             </tr>
-            @isset($intervention)
+            @if($intervention->count())
                 @foreach($intervention as $i)
-                    <tr>
-                        <td>{{ date('d-M-Y', strtotime($i->date)) }}</td>
-                        <td>{{ $i->description }}</td>
-                    </tr>
+                    @include('components.info.interventions', ['i' => $i])
                 @endforeach
-            @endisset
+            @else
+                <tr>
+                    <td colspan="3">Ne postoji ni jedna intervencija za ovog korisnika.</td>
+                </tr>
+            @endif
         </table>
     </div>
 </div>

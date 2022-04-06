@@ -15,6 +15,7 @@ class Intervention extends Model
 
     public function getIntervention($id){
         $data = DB::table('th_interventions')
+            ->join('th_type', 'th_type.id_type', '=', 'th_interventions.type_id')
             ->where('consumer_id', $id)
             ->get();
         return $data;

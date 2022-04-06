@@ -19,9 +19,9 @@
         </div>
     </div>
 
-    @include('components.search_form')
-    @include('components.consumer_form')
-    @include('components.intervention_form')
+    @include('components.home.search_form')
+    @include('components.home.consumer_form')
+    @include('components.home.intervention_form')
 
 </div>
 <div id="content">
@@ -30,7 +30,7 @@
         <h1>Tabela korisnika</h1>
     </div>
 
-    @include('components.sort')
+    @include('components.home.sort')
 
     <div id="content-of-consumers">
         <table class="content-of-users">
@@ -44,7 +44,7 @@
             </tr>
             @if($consumers->count())
                 @foreach ($consumers as $consumer)
-                    @include('components.consumer', ['consumer' => $consumer])
+                    @include('components.home.consumer', ['consumer' => $consumer])
                 @endforeach
             @else
                 <tr>
@@ -53,9 +53,7 @@
             @endif
         </table>
     </div>
-    {{--
-        comments in blade file
-    --}}
+    <a href="{{ route('profit') }}" class="profit"><input type="button" value="Profit" class="btn btn-dark"></a>
     {{--
     <div id="calculations">
         <label>Ukupan broj intervencija: <?= $num_interventions ?></label>
